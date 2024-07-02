@@ -10,12 +10,7 @@ const Contact = ({ contact: { id, name, number } }) => {
   const { showModal, modalContent } = useSelector(selectModal);
 
   const handleDeleteClick = () => {
-    dispatch(
-      openModal({
-        message: "Are you sure you want to delete this contact?",
-        onConfirm: () => handleConfirmDelete(),
-      })
-    );
+    dispatch(openModal("Are you sure you want to delete this contact?"));
   };
 
   const handleConfirmDelete = () => {
@@ -72,7 +67,7 @@ const Contact = ({ contact: { id, name, number } }) => {
           {number}
         </p>
       </div>
-      <button onClick={() => handleDeleteClick} className={css.button}>
+      <button onClick={handleDeleteClick} className={css.button}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -92,8 +87,8 @@ const Contact = ({ contact: { id, name, number } }) => {
       </button>
       {showModal && modalContent && (
         <ConfirmationModal
-          message={modalContent.message}
-          onConfirm={modalContent.onConfirm}
+          message={modalContent}
+          onConfirm={handleConfirmDelete}
           onCancel={handleCancelDelete}
         />
       )}
