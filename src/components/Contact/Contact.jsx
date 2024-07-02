@@ -1,10 +1,31 @@
+import { useDispatch, useSelector } from "react-redux";
 import { deleteContact } from "../../redux/contacts/operations";
+import { openModal, closeModal } from "../../redux/modal/slice";
 import css from "./Contact.module.css";
-import { useDispatch } from "react-redux";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal";
+import { selectModal } from "../../redux/modal/selectors";
 
 const Contact = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
-  const handleClick = () => dispatch(deleteContact(id));
+  const { showModal, modalContent } = useSelector(selectModal);
+
+  const handleDeleteClick = () => {
+    dispatch(
+      openModal({
+        message: "Are you sure you want to delete this contact?",
+        onConfirm: () => handleConfirmDelete(),
+      })
+    );
+  };
+
+  const handleConfirmDelete = () => {
+    dispatch(deleteContact(id));
+    dispatch(closeModal());
+  };
+
+  const handleCancelDelete = () => {
+    dispatch(closeModal());
+  };
 
   return (
     <div className={css.wrapper}>
@@ -51,7 +72,7 @@ const Contact = ({ contact: { id, name, number } }) => {
           {number}
         </p>
       </div>
-      <button onClick={handleClick} className={css.button}>
+      <button onClick={() => handleDeleteClick} className={css.button}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="32"
@@ -69,6 +90,13 @@ const Contact = ({ contact: { id, name, number } }) => {
           />
         </svg>
       </button>
+      {showModal && modalContent && (
+        <ConfirmationModal
+          message={modalContent.message}
+          onConfirm={modalContent.onConfirm}
+          onCancel={handleCancelDelete}
+        />
+      )}
     </div>
   );
 };
