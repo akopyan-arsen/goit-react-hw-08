@@ -1,11 +1,14 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { register } from "../../redux/auth/operations";
 import css from "./RegistrationForm.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useId } from "react";
+import { selectUserLoading } from "../../redux/auth/selectors";
+import Loader from "../Loader/Loader";
 
 const RegistrationForm = () => {
+  const isLoading = useSelector(selectUserLoading);
   const dispatch = useDispatch();
   const emailFieldId = useId();
   const passwordFieldId = useId();
@@ -25,7 +28,7 @@ const RegistrationForm = () => {
   const loginSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
-      .max(50, "Too Long!")
+      .max(8, "Too Long!")
       .required("Required"),
     email: Yup.string().email("Must be a valid email!").required("Required"),
     password: Yup.string()
@@ -38,13 +41,13 @@ const RegistrationForm = () => {
   });
 
   return (
-    <Formik
-      initialValues={{ name: "", email: "", password: "" }}
-      onSubmit={handleSubmit}
-      validationSchema={loginSchema}
-    >
-      <Form className={css.form}>
-        <div className={css.inputWrapper}>
+    <>
+      <Formik
+        initialValues={{ name: "", email: "", password: "" }}
+        onSubmit={handleSubmit}
+        validationSchema={loginSchema}
+      >
+        <Form className={css.form}>
           <div className={css.inputWrapper}>
             <label htmlFor={usernameFieldId} className={css.label}>
               Username
@@ -62,44 +65,47 @@ const RegistrationForm = () => {
             />
           </div>
 
-          <label htmlFor={emailFieldId} className={css.label}>
-            Email
-          </label>
-          <Field
-            type="email"
-            name="email"
-            id={emailFieldId}
-            className={css.input}
-          />
-          <ErrorMessage
-            className={css.ErrorMessage}
-            name="email"
-            component="span"
-          />
-        </div>
+          <div className={css.inputWrapper}>
+            <label htmlFor={emailFieldId} className={css.label}>
+              Email
+            </label>
+            <Field
+              type="email"
+              name="email"
+              id={emailFieldId}
+              className={css.input}
+            />
+            <ErrorMessage
+              className={css.ErrorMessage}
+              name="email"
+              component="span"
+            />
+          </div>
 
-        <div className={css.inputWrapper}>
-          <label htmlFor={passwordFieldId} className={css.label}>
-            Password
-          </label>
-          <Field
-            type="password"
-            name="password"
-            className={css.input}
-            id={passwordFieldId}
-          />
-          <ErrorMessage
-            className={css.ErrorMessage}
-            name="password"
-            component="span"
-          />
-        </div>
+          <div className={css.inputWrapper}>
+            <label htmlFor={passwordFieldId} className={css.label}>
+              Password
+            </label>
+            <Field
+              type="password"
+              name="password"
+              className={css.input}
+              id={passwordFieldId}
+            />
+            <ErrorMessage
+              className={css.ErrorMessage}
+              name="password"
+              component="span"
+            />
+          </div>
 
-        <button type="submit" className={css.button}>
-          Register
-        </button>
-      </Form>
-    </Formik>
+          <button type="submit" className={css.button}>
+            Register
+          </button>
+        </Form>
+      </Formik>
+      {isLoading && <Loader />}
+    </>
   );
 };
 

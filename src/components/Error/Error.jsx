@@ -1,4 +1,4 @@
-import errorImage from "../../images/68968d16f36dadb8a10e52b40e6f98c6.png";
+import errorImage from "../../images/error.png";
 import css from "./Error.module.css";
 
 const Error = () => {

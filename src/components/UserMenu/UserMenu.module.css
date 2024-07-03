@@ -1,0 +1,27 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.button {
+  display: flex;
+  justify-content: center;
+  width: 100px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #5b53c4;
+  box-shadow: 0px 7px 16px 0px rgba(19, 55, 110, 0.03),
+    0px 6px 20px 0px rgba(27, 27, 35, 0.03);
+  border: none;
+  font-family: "DM Sans";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #fdfcfd;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #2f23cf;
+}

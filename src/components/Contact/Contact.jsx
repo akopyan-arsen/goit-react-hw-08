@@ -22,6 +22,9 @@ import {
 } from "../../redux/update/slice";
 import { UserIcon, PhoneIcon, DeleteIcon } from "../../images/icons";
 import toast from "react-hot-toast";
+import { FaRegEdit, FaRegSave } from "react-icons/fa";
+import { HiDotsHorizontal } from "react-icons/hi";
+import clsx from "clsx";
 
 const Contact = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
@@ -57,6 +60,7 @@ const Contact = ({ contact: { id, name, number } }) => {
     ).unwrap();
     dispatch(stopEditing());
     dispatch(fetchContacts());
+    toast.success("Successfully updated!", { duration: 5000 });
   };
 
   return (
@@ -67,11 +71,13 @@ const Contact = ({ contact: { id, name, number } }) => {
             <input
               type="text"
               value={contactName}
+              className={css.input}
               onChange={(e) => dispatch(updateContactName(e.target.value))}
             />
             <input
               type="text"
               value={contactNumber}
+              className={css.input}
               onChange={(e) => dispatch(updateContactNumber(e.target.value))}
             />
           </>
@@ -88,16 +94,28 @@ const Contact = ({ contact: { id, name, number } }) => {
           </>
         )}
       </div>
-      <button onClick={handleDeleteClick} className={css.button}>
-        <DeleteIcon />
-      </button>
-      {isEditing ? (
-        <button onClick={handleSaveClick} disabled={updating}>
-          {updating ? "Saving..." : "Save"}
+      <div className={css.buttonWrapper}>
+        {isEditing ? (
+          <button
+            onClick={handleSaveClick}
+            disabled={updating}
+            className={clsx(css.button, css.save)}
+          >
+            {updating ? <HiDotsHorizontal /> : <FaRegSave />}
+          </button>
+        ) : (
+          <button
+            onClick={handleEditClick}
+            className={clsx(css.button, css.edit)}
+          >
+            <FaRegEdit />
+          </button>
+        )}
+        <button onClick={handleDeleteClick} className={css.button}>
+          <DeleteIcon />
         </button>
-      ) : (
-        <button onClick={handleEditClick}>Edit</button>
-      )}
+      </div>
+
       {showModal && modalContent && (
         <ConfirmationModal
           message={modalContent}

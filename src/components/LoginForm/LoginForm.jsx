@@ -1,14 +1,17 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
 import { login } from "../../redux/auth/operations";
 import css from "./LoginForm.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useId } from "react";
+import { selectUserLoading } from "../../redux/auth/selectors";
+import Loader from "../Loader/Loader";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const emailFieldId = useId();
   const passwordFieldId = useId();
+  const isLoading = useSelector(selectUserLoading);
 
   const handleSubmit = (values, actions) => {
     dispatch(
@@ -32,51 +35,54 @@ const LoginForm = () => {
   });
 
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      onSubmit={handleSubmit}
-      validationSchema={loginSchema}
-    >
-      <Form className={css.form}>
-        <div className={css.inputWrapper}>
-          <label htmlFor={emailFieldId} className={css.label}>
-            Email
-          </label>
-          <Field
-            type="email"
-            name="email"
-            id={emailFieldId}
-            className={css.input}
-          />
-          <ErrorMessage
-            className={css.ErrorMessage}
-            name="email"
-            component="span"
-          />
-        </div>
+    <>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        onSubmit={handleSubmit}
+        validationSchema={loginSchema}
+      >
+        <Form className={css.form}>
+          <div className={css.inputWrapper}>
+            <label htmlFor={emailFieldId} className={css.label}>
+              Email
+            </label>
+            <Field
+              type="email"
+              name="email"
+              id={emailFieldId}
+              className={css.input}
+            />
+            <ErrorMessage
+              className={css.ErrorMessage}
+              name="email"
+              component="span"
+            />
+          </div>
 
-        <div className={css.inputWrapper}>
-          <label htmlFor={passwordFieldId} className={css.label}>
-            Password
-          </label>
-          <Field
-            type="password"
-            name="password"
-            id={passwordFieldId}
-            className={css.input}
-          />
-          <ErrorMessage
-            className={css.ErrorMessage}
-            name="password"
-            component="span"
-          />
-        </div>
+          <div className={css.inputWrapper}>
+            <label htmlFor={passwordFieldId} className={css.label}>
+              Password
+            </label>
+            <Field
+              type="password"
+              name="password"
+              id={passwordFieldId}
+              className={css.input}
+            />
+            <ErrorMessage
+              className={css.ErrorMessage}
+              name="password"
+              component="span"
+            />
+          </div>
 
-        <button type="submit" className={css.button}>
-          Log In
-        </button>
-      </Form>
-    </Formik>
+          <button type="submit" className={css.button}>
+            Log In
+          </button>
+        </Form>
+      </Formik>
+      {isLoading && <Loader />}
+    </>
   );
 };
 

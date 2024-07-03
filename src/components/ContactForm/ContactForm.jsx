@@ -6,6 +6,8 @@ import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
+import { CheckIcon } from "../../images/icons";
+import MaskedInput from "react-text-mask";
 
 const ContactForm = () => {
   const nameFieldId = useId();
@@ -23,15 +25,15 @@ const ContactForm = () => {
     toast.success("Successfully created!", { duration: 5000 });
     actions.resetForm();
   };
+  const phoneRegExp = /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/;
 
   const contactSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
-      .max(50, "Too Long!")
+      .max(25, "Too Long!")
       .required("Required"),
     number: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
+      .matches(phoneRegExp, "Phone number is not valid")
       .required("Required"),
   });
 
@@ -63,37 +65,43 @@ const ContactForm = () => {
           <label htmlFor={phoneFieldId} className={css.label}>
             Phone number
           </label>
-          <Field
-            type="tel"
-            name="number"
-            id={phoneFieldId}
-            className={css.input}
-            placeholder="111-22-33"
-          />
+          <Field name="number" type="tel">
+            {({ field }) => (
+              <MaskedInput
+                {...field}
+                mask={[
+                  "(",
+                  /[0-9]/,
+                  /\d/,
+                  /\d/,
+                  ")",
+                  " ",
+                  /\d/,
+                  /\d/,
+                  /\d/,
+                  "-",
+                  /\d/,
+                  /\d/,
+                  "-",
+                  /\d/,
+                  /\d/,
+                ]}
+                placeholder="(063) 123-45-67"
+                className={css.input}
+                guide={false}
+              />
+            )}
+          </Field>
           <ErrorMessage
             className={css.ErrorMessage}
             name="number"
             component="span"
           />
         </div>
+
         <button type="submit" className={css.button}>
           Add contact
-          <svg
-            className={css.svg}
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="24"
-            viewBox="0 0 25 24"
-            fill="none"
-          >
-            <path
-              d="M5.75 11.2059L10.75 16.5L19.25 7.5"
-              stroke="#FDFCFD"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <CheckIcon />
         </button>
       </Form>
     </Formik>

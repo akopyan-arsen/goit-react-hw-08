@@ -6,7 +6,7 @@ import {
   selectFilterName,
   selectFilterNumber,
 } from "../../redux/filter/selectors";
-import { CheckIcon } from "../../images/icons";
+import { FilterIcon } from "../../images/icons";
 
 const SearchBox = () => {
   const filterId = useId();
@@ -31,7 +31,7 @@ const SearchBox = () => {
         />
 
         <div className={css.svg}>
-          <CheckIcon />
+          <FilterIcon />
         </div>
       </div>
     </div>

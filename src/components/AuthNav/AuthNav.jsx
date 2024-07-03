@@ -3,12 +3,16 @@ import css from "./AuthNav.module.css";
 
 export const AuthNav = () => {
   return (
-    <div>
+    <div className={css.nav}>
       <NavLink className={css.link} to="/register">
-        Register
+        <button type="button" className={css.button}>
+          Register
+        </button>
       </NavLink>
       <NavLink className={css.link} to="/login">
-        Log In
+        <button type="button" className={css.button}>
+          Log In
+        </button>
       </NavLink>
     </div>
   );

@@ -1,7 +1,10 @@
+import css from "./HomePage.module.css";
+import homeImg from "../../images/telephone.png";
+
 const HomePage = () => {
   return (
-    <div>
-      <h1>Welcome to our Phonebook!</h1>
+    <div className={css.wrapper}>
+      <img src={homeImg} alt="homePage" className={css.img} />
     </div>
   );
 };
