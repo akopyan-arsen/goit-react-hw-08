@@ -5,6 +5,7 @@ import { fetchContacts } from "../../redux/contacts/operations";
 import Loader from "../../components/Loader/Loader";
 import ContactForm from "../../components/ContactForm/ContactForm";
 import ContactList from "../../components/ContactList/ContactList";
+import SearchBox from "../../components/SearchBox/SearchBox";
 
 const ContactsPage = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const ContactsPage = () => {
   return (
     <>
       <ContactForm />
+      <SearchBox />
       {isLoading && <Loader />}
       <ContactList />
     </>

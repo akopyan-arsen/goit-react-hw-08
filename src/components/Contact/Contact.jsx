@@ -21,6 +21,7 @@ import {
   updateContactNumber,
 } from "../../redux/update/slice";
 import { UserIcon, PhoneIcon, DeleteIcon } from "../../images/icons";
+import toast from "react-hot-toast";
 
 const Contact = ({ contact: { id, name, number } }) => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const Contact = ({ contact: { id, name, number } }) => {
   const handleConfirmDelete = () => {
     dispatch(deleteContact(id));
     dispatch(closeModal());
+    toast.success("Successfully deleted!", { duration: 5000 });
   };
 
   const handleCancelDelete = () => {
@@ -49,8 +51,10 @@ const Contact = ({ contact: { id, name, number } }) => {
     dispatch(startEditing({ id, name, number }));
   };
 
-  const handleSaveClick = () => {
-    dispatch(updateContact({ id, name: contactName, number: contactNumber }));
+  const handleSaveClick = async () => {
+    await dispatch(
+      updateContact({ id, name: contactName, number: contactNumber })
+    ).unwrap();
     dispatch(stopEditing());
     dispatch(fetchContacts());
   };
@@ -85,7 +89,7 @@ const Contact = ({ contact: { id, name, number } }) => {
         )}
       </div>
       <button onClick={handleDeleteClick} className={css.button}>
-        <DeleteIcon className={css.svg} />
+        <DeleteIcon />
       </button>
       {isEditing ? (
         <button onClick={handleSaveClick} disabled={updating}>

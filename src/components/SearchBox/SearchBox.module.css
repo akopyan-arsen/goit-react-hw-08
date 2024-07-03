@@ -41,8 +41,8 @@
 
 .svg {
   position: absolute;
-  top: 50%;
+  top: 70%;
   left: 12px;
-  transform: translateY(-50%);
+  transform: translateY(-70%);
   pointer-events: none;
 }

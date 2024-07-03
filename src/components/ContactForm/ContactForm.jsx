@@ -5,6 +5,7 @@ import css from "./ContactForm.module.css";
 import { useId } from "react";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
+import toast from "react-hot-toast";
 
 const ContactForm = () => {
   const nameFieldId = useId();
@@ -19,6 +20,7 @@ const ContactForm = () => {
         number: values.number,
       })
     );
+    toast.success("Successfully created!", { duration: 5000 });
     actions.resetForm();
   };
 
