@@ -56,7 +56,7 @@ const Contact = ({ contact: { id, name, number } }) => {
 
   const handleSaveClick = async () => {
     await dispatch(
-      updateContact({ id, name: contactName, number: contactNumber })
+      updateContact({ contactId: id, name: contactName, number: contactNumber })
     ).unwrap();
     dispatch(stopEditing());
     dispatch(fetchContacts());

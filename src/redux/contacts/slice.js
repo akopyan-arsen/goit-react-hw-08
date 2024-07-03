@@ -6,6 +6,8 @@ import {
   updateContact,
 } from "./operations";
 
+import { logout } from "../auth/operations";
+
 const handlePending = (state) => {
   state.loading = true;
 };
@@ -59,6 +61,11 @@ const contactSlice = createSlice({
       .addCase(updateContact.rejected, (state, action) => {
         state.updating = false;
         state.error = action.payload;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.items = [];
+        state.error = null;
+        state.updating = false;
       });
   },
 });

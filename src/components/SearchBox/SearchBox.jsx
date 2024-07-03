@@ -2,16 +2,12 @@ import { useId } from "react";
 import css from "./SearchBox.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { filterContact } from "../../redux/filter/slice";
-import {
-  selectFilterName,
-  selectFilterNumber,
-} from "../../redux/filter/selectors";
+import { selectNameFilter } from "../../redux/filter/selectors";
 import { FilterIcon } from "../../images/icons";
 
 const SearchBox = () => {
   const filterId = useId();
-  const filterName = useSelector(selectFilterName);
-  const filterNumber = useSelector(selectFilterNumber);
+  const filterValue = useSelector(selectNameFilter);
   const dispatch = useDispatch();
 
   const handleChange = (event) => dispatch(filterContact(event.target.value));
@@ -24,12 +20,11 @@ const SearchBox = () => {
       <div className={css.inputWrapper}>
         <input
           type="text"
-          value={filterName ?? filterNumber}
+          value={filterValue}
           id={filterId}
           onChange={handleChange}
           className={css.input}
         />
-
         <div className={css.svg}>
           <FilterIcon />
         </div>

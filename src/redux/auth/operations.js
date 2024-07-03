@@ -1,8 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-axios.defaults.baseURL = "https://connections-api.herokuapp.com/";
-
 const setAuthHeader = (token) => {
   axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
 };
@@ -15,7 +13,10 @@ export const register = createAsyncThunk(
   "auth/register",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/users/signup", userData);
+      const response = await axios.post(
+        "https://connections-api.herokuapp.com/users/signup",
+        userData
+      );
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
@@ -28,11 +29,13 @@ export const login = createAsyncThunk(
   "auth/login",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/users/login", userData);
+      const response = await axios.post(
+        "https://connections-api.herokuapp.com/users/login",
+        userData
+      );
       setAuthHeader(response.data.token);
       return response.data;
     } catch (error) {
-      console.error("Login error:", error.message); // Додано логування
       return rejectWithValue(error.message);
     }
   }
@@ -42,10 +45,9 @@ export const logout = createAsyncThunk(
   "auth/logout",
   async (_, { rejectWithValue }) => {
     try {
-      await axios.post("/users/logout");
+      await axios.post("https://connections-api.herokuapp.com/users/logout");
       clearAuthHeader();
     } catch (error) {
-      console.error("Logout error:", error.message); // Додано логування
       return rejectWithValue(error.message);
     }
   }
@@ -58,11 +60,12 @@ export const refreshUser = createAsyncThunk(
       const state = getState();
       const savedToken = state.auth.token;
       setAuthHeader(savedToken);
-      const response = await axios.get("/users/current");
+      const response = await axios.get(
+        "https://connections-api.herokuapp.com/users/current"
+      );
       return response.data;
     } catch (error) {
       clearAuthHeader();
-      console.error("Refresh user error:", error.message); // Додано логування
       return rejectWithValue(error.message);
     }
   },
