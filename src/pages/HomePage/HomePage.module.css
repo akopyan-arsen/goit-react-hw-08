@@ -49,7 +49,9 @@
     line-height: 1.5;
     letter-spacing: 2px;
   }
-
+  .mainTitleText {
+    letter-spacing: -1px;
+  }
   .wrapper {
     width: 100%;
     height: 536px;
