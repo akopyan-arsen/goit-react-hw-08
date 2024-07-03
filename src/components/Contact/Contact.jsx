@@ -20,9 +20,14 @@ import {
   updateContactName,
   updateContactNumber,
 } from "../../redux/update/slice";
-import { UserIcon, PhoneIcon, DeleteIcon } from "../../images/icons";
+import {
+  UserIcon,
+  PhoneIcon,
+  DeleteIcon,
+  EditIcon,
+  SaveIcon,
+} from "../../images/icons";
 import toast from "react-hot-toast";
-import { FaRegEdit, FaRegSave } from "react-icons/fa";
 import { HiDotsHorizontal } from "react-icons/hi";
 import clsx from "clsx";
 
@@ -101,14 +106,14 @@ const Contact = ({ contact: { id, name, number } }) => {
             disabled={updating}
             className={clsx(css.button, css.save)}
           >
-            {updating ? <HiDotsHorizontal /> : <FaRegSave />}
+            {updating ? <HiDotsHorizontal /> : <SaveIcon />}
           </button>
         ) : (
           <button
             onClick={handleEditClick}
             className={clsx(css.button, css.edit)}
           >
-            <FaRegEdit />
+            <EditIcon />
           </button>
         )}
         <button onClick={handleDeleteClick} className={css.button}>

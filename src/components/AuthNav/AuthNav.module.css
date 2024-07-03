@@ -2,11 +2,16 @@
   display: flex;
   gap: 20px;
 }
-
+.link {
+  text-decoration: none;
+}
 .button {
   display: flex;
   justify-content: center;
-  width: 100px;
+  align-items: center;
+  text-decoration: none;
+  width: 128px;
+  height: 40px;
   padding: 12px;
   border-radius: 8px;
   background: #5b53c4;
@@ -20,7 +25,22 @@
   color: #fdfcfd;
   cursor: pointer;
 }
-
+.loginButton {
+  color: #0b0b0b;
+  border: 2px solid #5b53c4;
+  background: transparent;
+}
 .button:hover {
   background: #2f23cf;
+}
+.loginButton:hover {
+  background: transparent;
+  border: 3px solid #5b53c4;
+}
+@media screen and (min-width: 375px) and (max-width: 400px) {
+  .nav {
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
 }

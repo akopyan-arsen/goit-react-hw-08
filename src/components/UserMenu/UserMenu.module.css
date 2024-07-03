@@ -3,25 +3,39 @@
   gap: 20px;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 32px;
 }
 .button {
   display: flex;
-  justify-content: center;
-  width: 100px;
+  width: 128px;
+  height: 40px;
   padding: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
   border-radius: 8px;
-  background: #5b53c4;
-  box-shadow: 0px 7px 16px 0px rgba(19, 55, 110, 0.03),
-    0px 6px 20px 0px rgba(27, 27, 35, 0.03);
-  border: none;
+  border: 2px solid #5b53c4;
+  color: #0b0b0b;
   font-family: "DM Sans";
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 1.5;
-  color: #fdfcfd;
-  cursor: pointer;
 }
 
 .button:hover {
-  background: #2f23cf;
+  border: 3px solid #5b53c4;
+}
+.username {
+  color: #0b0b0b;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.56;
+}
+@media screen and (min-width: 375px) and (max-width: 400px) {
+  .username {
+    font-size: 16px;
+  }
+  .button {
+    width: 100px;
+  }
 }
