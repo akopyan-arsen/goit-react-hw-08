@@ -43,7 +43,7 @@
 .button {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 4px;
   width: 344px;
   padding: 12px;
   border-radius: 8px;

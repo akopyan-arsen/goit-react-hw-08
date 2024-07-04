@@ -57,6 +57,7 @@
   line-height: 1.5;
   color: #fdfcfd;
   cursor: pointer;
+  gap: 4px;
 }
 
 .button:hover {
@@ -72,4 +73,10 @@
 }
 .svg {
   margin-left: 12px;
+}
+.error {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 14px;
+  color: rgb(207, 19, 19);
 }

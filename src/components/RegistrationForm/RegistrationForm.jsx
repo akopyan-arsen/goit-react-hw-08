@@ -4,8 +4,9 @@ import { register } from "../../redux/auth/operations";
 import css from "./RegistrationForm.module.css";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useId } from "react";
-import { selectUserLoading } from "../../redux/auth/selectors";
+import { selectAuthError, selectUserLoading } from "../../redux/auth/selectors";
 import Loader from "../Loader/Loader";
+import { CheckIcon } from "../../images/icons";
 
 const RegistrationForm = () => {
   const isLoading = useSelector(selectUserLoading);
@@ -13,6 +14,7 @@ const RegistrationForm = () => {
   const emailFieldId = useId();
   const passwordFieldId = useId();
   const usernameFieldId = useId();
+  const error = useSelector(selectAuthError);
 
   const handleSubmit = (values, actions) => {
     dispatch(
@@ -28,7 +30,7 @@ const RegistrationForm = () => {
   const loginSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
-      .max(8, "Too Long!")
+      .max(15, "Too Long!")
       .required("Required"),
     email: Yup.string().email("Must be a valid email!").required("Required"),
     password: Yup.string()
@@ -57,6 +59,7 @@ const RegistrationForm = () => {
               name="name"
               id={usernameFieldId}
               className={css.input}
+              placeholder="Kateryna"
             />
             <ErrorMessage
               className={css.ErrorMessage}
@@ -74,6 +77,7 @@ const RegistrationForm = () => {
               name="email"
               id={emailFieldId}
               className={css.input}
+              placeholder="kateryna.bobryshova@gmail.com"
             />
             <ErrorMessage
               className={css.ErrorMessage}
@@ -91,6 +95,7 @@ const RegistrationForm = () => {
               name="password"
               className={css.input}
               id={passwordFieldId}
+              placeholder="********"
             />
             <ErrorMessage
               className={css.ErrorMessage}
@@ -101,10 +106,14 @@ const RegistrationForm = () => {
 
           <button type="submit" className={css.button}>
             Register
+            <CheckIcon />
           </button>
         </Form>
       </Formik>
       {isLoading && <Loader />}
+      {error && (
+        <div className={css.error}>Something went wrong, try again!</div>
+      )}
     </>
   );
 };

@@ -6,12 +6,15 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useId } from "react";
 import { selectUserLoading } from "../../redux/auth/selectors";
 import Loader from "../Loader/Loader";
+import { selectAuthError } from "../../redux/auth/selectors";
+import { CheckIcon } from "../../images/icons";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
   const emailFieldId = useId();
   const passwordFieldId = useId();
   const isLoading = useSelector(selectUserLoading);
+  const error = useSelector(selectAuthError);
 
   const handleSubmit = (values, actions) => {
     dispatch(
@@ -51,6 +54,7 @@ const LoginForm = () => {
               name="email"
               id={emailFieldId}
               className={css.input}
+              placeholder="kateryna.bobryshova@gmail.com"
             />
             <ErrorMessage
               className={css.ErrorMessage}
@@ -68,6 +72,7 @@ const LoginForm = () => {
               name="password"
               id={passwordFieldId}
               className={css.input}
+              placeholder="********"
             />
             <ErrorMessage
               className={css.ErrorMessage}
@@ -78,10 +83,12 @@ const LoginForm = () => {
 
           <button type="submit" className={css.button}>
             Log In
+            <CheckIcon />
           </button>
         </Form>
       </Formik>
       {isLoading && <Loader />}
+      {error && <div className={css.error}>Wrong email or password</div>}
     </>
   );
 };
