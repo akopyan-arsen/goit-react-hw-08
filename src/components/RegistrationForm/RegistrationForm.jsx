@@ -36,7 +36,7 @@ const RegistrationForm = () => {
   const loginSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Too Short!")
-      .max(15, "Too Long!")
+      .max(10, "Too Long!")
       .required("Required"),
     email: Yup.string().email("Must be a valid email!").required("Required"),
     password: Yup.string()
