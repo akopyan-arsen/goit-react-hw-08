@@ -7,6 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 24px;
   }
 
   .titleLink {
@@ -25,6 +26,6 @@
     font-size: 42px;
     font-weight: 400;
     line-height: 1.5;
-    letter-spacing: -1px;
+    letter-spacing: 1px;
   }
 }

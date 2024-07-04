@@ -8,12 +8,12 @@ import ContactList from "../../components/ContactList/ContactList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import { NavLink } from "react-router-dom";
 import css from "./ContactPage.module.css";
-import { LogoIcon } from "../../images/icons";
-
+import { LogoIcon2 } from "../../images/icons";
+import { selectUser } from "../../redux/auth/selectors";
 const ContactsPage = () => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectLoading);
-
+  const user = useSelector(selectUser);
   useEffect(() => {
     startTransition(() => {
       dispatch(fetchContacts());
@@ -24,8 +24,8 @@ const ContactsPage = () => {
     <>
       <NavLink className={css.titleLink} to="/">
         <div className={css.title}>
-          <LogoIcon />
-          <h1 className={css.titleText}>Phonebook</h1>
+          <LogoIcon2 />
+          <h1 className={css.titleText}>{user.name}&#39;s Phonebook</h1>
         </div>
       </NavLink>
       <ContactForm />

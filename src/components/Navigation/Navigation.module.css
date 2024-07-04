@@ -1,25 +1,9 @@
 .nav {
   display: flex;
-  gap: 56px;
-  margin-bottom: 32px;
   align-items: center;
 }
 .titleLink {
   text-decoration: none;
-}
-
-.contactlink {
-  text-decoration: none;
-  color: currentColor;
-  color: #0b0b0b;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1.56;
-  text-decoration: none;
-  color: currentColor;
-}
-.active {
-  font-weight: 500;
 }
 
 .title {
@@ -36,13 +20,11 @@
   font-size: 36px;
   font-weight: 400;
   line-height: 1.5;
-  letter-spacing: -1px;
+  letter-spacing: 2px;
 }
+
 @media screen and (min-width: 375px) and (max-width: 400px) {
-  .titleLink {
-    display: none;
-  }
-  .contactlink {
+  .title {
     display: none;
   }
 }

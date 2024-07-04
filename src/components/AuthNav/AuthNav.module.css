@@ -39,7 +39,7 @@
 }
 @media screen and (min-width: 375px) and (max-width: 400px) {
   .nav {
-    justify-content: center;
+    justify-content: space-between;
     gap: 16px;
     margin-bottom: 16px;
   }

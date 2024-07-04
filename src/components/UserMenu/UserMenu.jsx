@@ -1,16 +1,20 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { logout } from "../../redux/auth/operations";
 import css from "./UserMenu.module.css";
-import { selectUser } from "../../redux/auth/selectors";
+import clsx from "clsx";
+import { NavLink } from "react-router-dom";
 
 export const UserMenu = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const handleClick = () => dispatch(logout());
-
+  const buildLinkClass = ({ isActive }) => {
+    return clsx(css.contactlink, isActive && css.active);
+  };
   return (
     <div className={css.wrapper}>
-      <p className={css.username}>Welcome, {user.name}</p>
+      <NavLink className={buildLinkClass} to="/contacts">
+        Contacts
+      </NavLink>
       <button type="button" onClick={handleClick} className={css.button}>
         Log Out
       </button>

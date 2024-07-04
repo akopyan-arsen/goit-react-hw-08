@@ -13,11 +13,14 @@ const LoginPage = () => {
       dispatch(clearAuthError());
     };
   }, [dispatch]);
+
   return (
     <>
       <NavLink className={css.titleLink} to="/">
         <div className={css.title}>
-          <LogoIcon />
+          <div className={css.icon}>
+            <LogoIcon />
+          </div>
           <h1 className={css.titleText}>Phonebook</h1>
         </div>
       </NavLink>
