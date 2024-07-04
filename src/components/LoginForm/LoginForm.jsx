@@ -34,13 +34,7 @@ const LoginForm = () => {
 
   const loginSchema = Yup.object().shape({
     email: Yup.string().email("Must be a valid email!").required("Required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .max(15, "Password must be no more than 15 characters")
-      .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-      .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .matches(/[0-9]/, "Password must contain at least one number")
-      .required("Password is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   return (
