@@ -60,7 +60,7 @@ const LoginForm = () => {
               name="email"
               id={emailFieldId}
               className={css.input}
-              placeholder="kateryna.bobryshova@gmail.com"
+              placeholder="example@mail.com"
             />
             <ErrorMessage
               className={css.ErrorMessage}
