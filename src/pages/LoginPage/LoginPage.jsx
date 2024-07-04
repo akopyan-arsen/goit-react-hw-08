@@ -18,9 +18,7 @@ const LoginPage = () => {
     <>
       <NavLink className={css.titleLink} to="/">
         <div className={css.title}>
-          <div className={css.icon}>
-            <LogoIcon />
-          </div>
+          <LogoIcon />
           <h1 className={css.titleText}>Phonebook</h1>
         </div>
       </NavLink>
