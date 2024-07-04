@@ -23,8 +23,14 @@ const RegistrationForm = () => {
         email: values.email,
         password: values.password,
       })
-    );
-    actions.resetForm();
+    )
+      .unwrap()
+      .then(() => {
+        actions.resetForm();
+      })
+      .catch((error) => {
+        error.message;
+      });
   };
 
   const loginSchema = Yup.object().shape({
