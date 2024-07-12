@@ -45,28 +45,36 @@ const Contact = ({ contact: { id, name, number } }) => {
     dispatch(openModal("Are you sure you want to delete this contact?"));
   };
 
-  const handleConfirmDelete = () => {
-    dispatch(deleteContact(id));
-    dispatch(closeModal());
-    toast.success("Successfully deleted!", { duration: 5000 });
+  const handleConfirmDelete = async () => {
+    try {
+      await dispatch(deleteContact(id)).unwrap();
+      dispatch(closeModal());
+      toast.success("Successfully deleted!", { duration: 5000 });
+    } catch (error) {
+      dispatch(closeModal());
+      toast.error("Failed to delete contact. Please try again.", { duration: 5000 });
+    }
   };
 
   const handleCancelDelete = () => {
     dispatch(closeModal());
   };
 
-  const handleEditClick = () => {
+  const handleEditClick = async () => {
     dispatch(startEditing({ id, name, number }));
-  };
+  }
 
   const handleSaveClick = async () => {
-    await dispatch(
+    try  {await dispatch(
       updateContact({ contactId: id, name: contactName, number: contactNumber })
     ).unwrap();
     dispatch(stopEditing());
     dispatch(fetchContacts());
-    toast.success("Successfully updated!", { duration: 5000 });
-  };
+    toast.success("Successfully updated!", { duration: 5000 });}
+    catch (error) {
+      dispatch(stopEditing());
+      toast.error("Failed to update contact. Please try again.", { duration: 5000 });
+  }};
 
   return (
     <div className={css.wrapper}>

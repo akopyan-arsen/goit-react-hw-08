@@ -14,16 +14,17 @@ const ContactForm = () => {
   const phoneFieldId = useId();
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
-    dispatch(
+  const handleSubmit = async (values, actions) => {
+    try {await dispatch(
       addContact({
         createdAt: new Date().toISOString(),
         name: values.name,
         number: values.number,
       })
-    );
+    ).unwrap();
     toast.success("Successfully created!", { duration: 5000 });
-    actions.resetForm();
+    actions.resetForm();}
+    catch (error) { toast.error("Failed to add contact. Please try again.", { duration: 5000 })}
   };
   const phoneRegExp = /^\(\d{3}\) \d{3}-\d{2}-\d{2}$/;
 
