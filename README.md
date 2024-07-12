@@ -1,8 +1,19 @@
-# React + Vite
+# ☎️ Phonebook
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The aim of the Phonebook project built with React is to create a user-friendly application that allows users to register and log in to securely manage their contacts. This project will enable users to store, update, and delete contact information efficiently. The registration and login functionalities ensure that each user's data is private and accessible only to them.
 
-Currently, two official plugins are available:
+## The technologies that were used
+```markdown
++ HTML/CSS
++ JavaScript
++ React
++ Git/GitHub
++ Figma
++ Redux Toolkit
++ Redux Persist
++ Formik
++ Axios
++ React Router
++ clsx
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
